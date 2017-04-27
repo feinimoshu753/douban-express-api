@@ -32,5 +32,26 @@ router.get('/latest', function (req, res, next) {
     });
 });
 
+//top250
+router.get('/top250', function (req, res, next) {
+    var start = req.param('start') ? req.param('start') : 0;
+    var count = req.param('count') ? req.param('count') : 10;
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/movie_top250/items?start=' + start + '&count=' + count;
+    request(url, function (error, response, body) {
+        res.send(body);
+    });
+});
+
+//分类
+router.get('/classification', function (req, res, next) {
+    var type = req.param('type') ? req.param('type') :'';
+    var start = req.param('start') ? req.param('start') : 0;
+    var count = req.param('count') ? req.param('count') : 10;
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/filter_movie_'+ type +'_hot/items?start=' + start + '&count=' + count;
+    request(url, function (error, response, body) {
+        res.send(body);
+    });
+});
+
 
 module.exports = router;
