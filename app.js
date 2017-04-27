@@ -11,6 +11,7 @@ var book = require('./routes/book');
 var movie = require('./routes/movie');
 var music= require('./routes/music');
 var tv = require('./routes/tv');
+var doulist = require('./routes/doulist');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/book', book);
 app.use('/movie', movie);
 app.use('/music', music);
 app.use('/tv', tv);
+app.use('/doulist', doulist);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
