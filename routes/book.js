@@ -43,6 +43,13 @@ router.get('/classification', function (req, res, next) {
     });
 });
 
-
+//详情
+router.get('/detail', function (req, res, next) {
+    var id = req.param('id') ? req.param('id') :'';
+    var url = 'https://m.douban.com/rexxar/api/v2/book/' + id;
+    request(url, function (error, response, body) {
+        res.send(body);
+    });
+});
 
 module.exports = router;
