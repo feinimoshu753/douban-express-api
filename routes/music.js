@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-//话语新碟榜
+//华语新碟榜
 router.get('/chinese', function (req, res, next) {
     var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/music_chinese/items?start=0&count=10';
     request(url,function (error,response,body) {
