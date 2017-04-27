@@ -1,20 +1,31 @@
 var express = require('express');
-var http = require('http');
+var request = require('request');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    var request = http.request({
-        host: 'api.douban.com',
-        path: '/v2/movie/top250'
-        },function (sres) {
-            sres.pipe(res);
-            sres.on('end', function(){
-                console.log('done');
-            });
-        }
-    );
-    req.pipe(request);
+//虚构类图书
+router.get('/fiction', function (req, res, next) {
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/book_fiction/items?start=0&count=10';
+    request(url,function (error,response,body) {
+        res.send(body);
+    });
 });
+
+//非虚构类图书
+router.get('/nonfiction', function (req, res, next) {
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/book_nonfiction/items?start=0&count=10';
+    request(url,function (error,response,body) {
+        res.send(body);
+    });
+});
+
+//纸质书
+router.get('/market_product', function (req, res, next) {
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/market_product_book/items?start=0&count=10';
+    request(url,function (error,response,body) {
+        res.send(body);
+    });
+});
+
+
 
 module.exports = router;
