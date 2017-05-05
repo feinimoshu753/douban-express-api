@@ -44,10 +44,10 @@ router.get('/top250', function (req, res, next) {
 
 //分类
 router.get('/classification', function (req, res, next) {
-    var type = req.param('type') ? req.param('type') :'';
+    var type = req.param('type') ? req.param('type') : '';
     var start = req.param('start') ? req.param('start') : 0;
     var count = req.param('count') ? req.param('count') : 10;
-    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/filter_movie_'+ type +'_hot/items?start=' + start + '&count=' + count;
+    var url = 'https://m.douban.com/rexxar/api/v2/subject_collection/filter_movie_' + type + '_hot/items?start=' + start + '&count=' + count;
     request(url, function (error, response, body) {
         res.send(body);
     });
@@ -55,8 +55,19 @@ router.get('/classification', function (req, res, next) {
 
 //详情
 router.get('/detail', function (req, res, next) {
-    var id = req.param('id') ? req.param('id') :'';
+    var id = req.param('id') ? req.param('id') : '';
     var url = 'https://m.douban.com/rexxar/api/v2/movie/' + id;
+    request(url, function (error, response, body) {
+        res.send(body);
+    });
+});
+
+//评论列表
+router.get('/comments', function (req, res, next) {
+    var id = req.param('id') ? req.param('id') : '';
+    var start = req.param('start') ? req.param('start') : 0;
+    var count = req.param('count') ? req.param('count') : 10;
+    var url = 'https://m.douban.com/rexxar/api/v2/movie/' + id + '/interests?order_by=hot?start=' + start + '&count=' + count;
     request(url, function (error, response, body) {
         res.send(body);
     });

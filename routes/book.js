@@ -52,4 +52,15 @@ router.get('/detail', function (req, res, next) {
     });
 });
 
+//评论列表
+router.get('/comments', function (req, res, next) {
+    var id = req.param('id') ? req.param('id') : '';
+    var start = req.param('start') ? req.param('start') : 0;
+    var count = req.param('count') ? req.param('count') : 10;
+    var url = 'https://m.douban.com/rexxar/api/v2/book/' + id + '/interests?order_by=hot?start=' + start + '&count=' + count;
+    request(url, function (error, response, body) {
+        res.send(body);
+    });
+});
+
 module.exports = router;
